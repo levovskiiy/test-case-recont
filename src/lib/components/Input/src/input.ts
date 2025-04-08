@@ -5,7 +5,7 @@ export const inputProps = {
     type: String,
     default: '',
   },
-  placehodler: {
+  placeholder: {
     type: String,
   },
   error: {

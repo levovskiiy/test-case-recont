@@ -47,7 +47,7 @@ function onInput(event: Event) {
         ref="input"
         v-bind="inputAttrs"
         :value="modelValue"
-        :placeholder="placehodler"
+        :placeholder="placeholder"
         class="input-field"
         @focus="onFocus"
         @blur="onBlur"
@@ -60,9 +60,6 @@ function onInput(event: Event) {
 
 <style lang="scss" scoped>
 .input {
-  --default-color: 28, 125, 65;
-  --error-color: 144, 11, 9;
-
   min-height: 40px;
   box-sizing: border-box;
   position: relative;
@@ -82,13 +79,13 @@ function onInput(event: Event) {
     background: rgba(245, 246, 246, 1);
 
     &.focused {
-      background: rgba(var(--default-color), 0.05);
-      box-shadow: 0 0 0 2px rgb(var(--default-color)) inset;
+      background: rgba(var(--primary-color-token), 0.05);
+      box-shadow: 0 0 0 2px rgb(var(--primary-color-token)) inset;
     }
 
     &.error {
-      background: rgba(var(--error-color), 0.05);
-      box-shadow: 0 0 0 2px rgb(var(--error-color)) inset;
+      background: rgba(var(--error-color-token), 0.05);
+      box-shadow: 0 0 0 2px rgb(var(--error-color-token)) inset;
     }
 
     .input-field {
