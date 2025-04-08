@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`input > Обновляет переданное состояние ввода > 1 1`] = `"1"`;
+
+exports[`input > Обновляет переданное состояние ввода > 123 1`] = `"1"`;
+
+exports[`input > Обновляет переданное состояние ввода > test 1`] = `"test"`;

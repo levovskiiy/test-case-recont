@@ -1,0 +1,45 @@
+@import './fonts.scss';
+
+:root {
+  --primary-color: 28, 125, 65;
+  --error-color: 144, 11, 9, 1;
+  --foreground-color: rgba(245, 246, 246, 1);
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  font-feature-settings:
+    'tnum' on,
+    'lnum' on;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+body,
+#app {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex: 1;
+}
+
+.container {
+  padding: 0 40px;
+
+  @media (max-width: 768px) {
+    padding: 0 72px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 28px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 0 20px;
+  }
+}
