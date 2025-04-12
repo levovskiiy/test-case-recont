@@ -1,0 +1,47 @@
+@layer components {
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    user-select: none;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #fff;
+
+    &.primary {
+      background: var(--primary-color);
+
+      &:not(.disabled):not(:disabled):hover {
+        filter: brightness(0.95);
+      }
+    }
+
+    &.no-border {
+      background: unset;
+      color: rgba(112, 119, 134, 1);
+
+      &:not(.disabled):not(:disabled):hover {
+        background: rgba(112, 119, 134, 0.09);
+      }
+    }
+
+    &.disabled,
+    &:disabled {
+      cursor: not-allowed;
+      background: rgba(8, 11, 22, 0.3);
+    }
+
+    &.small {
+      padding: 6px;
+    }
+
+    &.large {
+      padding: 14px;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@layer utility {
+  .text {
+    color: rgba(15, 23, 42, 1);
+
+    &-color-placeholder {
+      color: rgba(112, 119, 134, 1);
+    }
+
+    &-base {
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    &-note {
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    &-bold {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    &-leading {
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+
+    &-heading {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
+}

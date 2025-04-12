@@ -1,0 +1,25 @@
+@use 'breakpoints' as *;
+
+@mixin mobile() {
+  @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin large-mobile() {
+  @media screen and (max-width: $large-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media screen and (max-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @media screen and (max-width: $desktop) {
+    @content;
+  }
+}

@@ -1,0 +1,10 @@
+:root {
+  --text-color-base: rgba(15, 23, 42, 1);
+  --text-color-placeholder: rgba(112, 119, 134, 1);
+  --hover-color-base: rgba(245, 246, 246, 1);
+  --primary-color-token: 28, 125, 65;
+  --error-color-token: 144, 11, 9, 1;
+  --primary-color: rgb(var(--primary-color-token));
+  --error-color: rgb(var(--error-color-token));
+  --foreground-color: rgba(245, 246, 246, 1);
+}
