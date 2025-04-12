@@ -64,7 +64,10 @@ function selectItem(it: any) {
 }
 
 useKeyPress(['Tab', 'Escape'], close)
-useClickOutside(rootRef, close)
+useClickOutside(rootRef, () => {
+  console.log('aa')
+  close()
+})
 </script>
 
 <template>

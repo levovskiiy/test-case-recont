@@ -2,6 +2,7 @@
 import { IconClose } from '@/lib/icons'
 import { useKeyPress } from '@/lib/composables'
 import { dialogEmits, dialogProps } from './dialog.ts'
+import { useTemplateRef } from 'vue'
 
 defineOptions({
   inheritAttrs: false,
@@ -16,14 +17,16 @@ function close() {
 }
 
 useKeyPress(['Escape'], close)
+
+const dialog = useTemplateRef('dialog')
 </script>
 
 <template>
   <Teleport to="body">
     <Transition name="fade">
-      <div v-show="visible" class="dialog-viewport" @click="close">
-        <div class="overlay-dialog">
-          <div ref="dialog" v-bind="$attrs" class="dialog" :class="{ fullscreen }" @click.stop>
+      <div v-show="visible" class="dialog-viewport">
+        <div class="overlay-dialog" @click.self="close">
+          <div ref="dialog" v-bind="$attrs" class="dialog" :class="{ fullscreen }">
             <header class="header">
               <slot name="header">
                 <div class="wrapper">
