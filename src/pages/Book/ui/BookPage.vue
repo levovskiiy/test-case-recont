@@ -14,6 +14,7 @@ import {
   BookListFilters,
   BookFiltersModal,
 } from '.'
+import { IconAddBook } from '@/lib/icons'
 
 const isMobile = useMobile()
 const isTablet = useMediaQuery(`(max-width: ${TABLET}px)`)
@@ -82,6 +83,7 @@ async function updateFilters() {
 
     <div class="add-action container">
       <button v-if="isMobile" type="button" class="action button primary" @click="onCreateBook">
+        <IconAddBook />
         Добавить книгу
       </button>
     </div>

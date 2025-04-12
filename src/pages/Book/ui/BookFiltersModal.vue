@@ -5,7 +5,7 @@ import { useConfirmDialog } from '@/lib/composables'
 import { cloneMaybeReactive } from '@/lib/utils'
 import type { Filters, Sorts } from '../state/schema'
 import { DEFAULT_FILTERS } from '../state/filters'
-import { DEFAULT_SORT, sort } from '../state/sort'
+import { DEFAULT_SORT } from '../state/sort'
 import { BookListFilters, BookListSorts } from '.'
 
 const {
@@ -48,7 +48,11 @@ defineExpose({
 <template>
   <Dialog title="Фильтры" fullscreen :visible="opened" class="book-filters-modal" @close="cancel">
     <div class="content">
-      <BookListSorts v-model:column="sort.sortColumn" v-model:order="sort.sortOrder" />
+      <BookListSorts
+        v-model:column="sortState.sortColumn"
+        v-model:order="sortState.sortOrder"
+        class="sorts"
+      />
       <BookListFilters
         v-model:authors="filtersState.authors"
         v-model:genres="filtersState.genres"
@@ -68,6 +72,12 @@ defineExpose({
     flex-flow: column nowrap;
     flex: 1;
     gap: 12px;
+    width: 100%;
+
+    .sorts {
+      flex-flow: column nowrap;
+      align-items: flex-start;
+    }
   }
 }
 </style>
