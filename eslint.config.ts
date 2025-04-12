@@ -23,14 +23,12 @@ export default defineConfigWithVueTs(
   {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-    },
   },
   skipFormatting,
   {
     rules: {
       'vue/multi-word-component-names': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 )

@@ -1,0 +1,5 @@
+export { default as IconSearch } from './IconSearch.vue'
+export { default as IconClose } from './IconClose.vue'
+export { default as IconEdit } from './IconEdit.vue'
+export { default as IconTrash } from './IconTrash.vue'
+export { default as IconAddBook } from './IconAddBook.vue'
