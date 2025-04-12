@@ -30,7 +30,7 @@ async function onCreateBook() {
 async function onEditBook(book: Book, index: number) {
   const { data, canceled } = await bookEditModal.value.open(book)
   if (data && !canceled) {
-    editBook(book, index)
+    editBook(data, index)
   }
 }
 
