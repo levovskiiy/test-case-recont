@@ -20,7 +20,6 @@ describe('useAttrs', () => {
       attrs: attrs,
     })
   }
-
   test('Должен исключать только стили и классы по умолчанию', () => {
     componentFactory({
       class: 'test',
@@ -34,12 +33,10 @@ describe('useAttrs', () => {
     expect(wrapper.vm.attrs['style']).not.toBeDefined()
     expect(wrapper.vm.attrs['test']).toBeDefined()
   })
-
   test('Должен исключать переданные атрибуты', () => {
     componentFactory({ testAttr: 'test' }, { excludeKeys: new Set(['testAttr']) })
     expect(wrapper.vm.attrs).toStrictEqual({})
   })
-
   test('Исключает слушателей событий при установки данной опции', () => {
     componentFactory({ 'on-Click': () => {} }, { excludeListeners: true })
     expect(wrapper.vm.attrs['on-Click']).not.toBeDefined()
