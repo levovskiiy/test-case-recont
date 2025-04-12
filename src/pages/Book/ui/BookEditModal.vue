@@ -5,6 +5,7 @@ import { Dialog, Input, FormField } from '@/lib/components'
 import { cloneMaybeReactive } from '@/lib/utils'
 import type { Book } from '@/entities/book'
 import { useBookForm } from '../composables/useBookForm'
+import { IconAddBook } from '@/lib/icons'
 
 const { opened, open: _open, cancel, confirm } = useConfirmDialog<Book, null>()
 const { book, original, reset, invalid, validator, hasChanges } = useBookForm()
@@ -23,12 +24,12 @@ function open(editBook: Book | null = null) {
   return _open()
 }
 
-const modalTitle = computed(() => (isEdit.value ? 'Редактировать книгу' : 'Добавить книгу'))
+const modalTitle = computed(() => (isEdit.value ? 'Редактирование' : 'Добавить книгу'))
 const modalDescription = computed(() =>
-  isEdit.value ? null : 'Заполните все поля и добавьте книгу в список',
+  isEdit.value ? 'Внесите изменение в карточке' : 'Заполните все поля и добавьте книгу в список',
 )
 
-const buttonSaveTitle = computed(() => (isEdit.value ? 'Сохранить' : 'Добавить книгу'))
+const buttonSaveTitle = computed(() => (isEdit.value ? 'Сохранить' : 'Добавить'))
 
 function save() {
   return confirm(structuredClone(toRaw(book)))
@@ -50,12 +51,15 @@ defineExpose({
   >
     <template #default>
       <div class="form">
-        <FormField title="Название">
+        <FormField title="Название" :error="validator.name.$error">
           <Input
             v-model="book.name"
             :error="validator.name.$error"
             placeholder="Название произведения"
           />
+          <template #description>
+            <span v-for="err in validator.name.$errors" :key="err.$uid">{{ err.$message }}</span>
+          </template>
         </FormField>
         <FormField title="Автор" :error="validator.author.$error">
           <Input
@@ -67,8 +71,11 @@ defineExpose({
             <span v-for="err in validator.author.$errors" :key="err.$uid">{{ err.$message }}</span>
           </template>
         </FormField>
-        <FormField title="Год">
+        <FormField title="Год" :error="validator.year.$error">
           <Input v-model="book.year" :error="validator.year.$error" placeholder="Год выпуска" />
+          <template #description>
+            <span v-for="err in validator.year.$errors" :key="err.$uid">{{ err.$message }}</span>
+          </template>
         </FormField>
         <FormField title="Жанр">
           <Input v-model="book.genre" placeholder="Добавьте жанр произведения" />
@@ -82,6 +89,7 @@ defineExpose({
         :disabled="invalid || !hasChanges"
         @click="save"
       >
+        <IconAddBook v-if="!isEdit" />
         {{ buttonSaveTitle }}
       </button>
     </template>
