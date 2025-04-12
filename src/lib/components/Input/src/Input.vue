@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref, useAttrs, useTemplateRef } from 'vue'
+import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useAttrs as useExcludedAttrs } from '@/lib/composables'
 import { inputEmits, inputProps } from './input'
 
@@ -7,16 +7,26 @@ defineOptions({
   inheritAttrs: false,
 })
 
+defineSlots<{
+  left(): any
+  right(): any
+}>()
+
 const props = defineProps(inputProps)
 const emit = defineEmits(inputEmits)
 
 const focused = ref(false)
-const inputRef = useTemplateRef('input')
 
 const allAttrs = useAttrs()
 const inputAttrs = useExcludedAttrs()
+
+const slots = useSlots()
+
 const containerCls = computed(() => [
   {
+    grouped: !!slots.left || !!slots.right,
+    'grouped-left': !!slots.left,
+    'grouped-righ': !!slots.righ,
     focused: focused.value,
     error: props.error,
   },
@@ -40,9 +50,11 @@ function onInput(event: Event) {
 </script>
 
 <template>
-  <div class="input">
-    <slot name="left" />
-    <div class="input-wrapper" @click.stop="inputRef?.focus()" :class="containerCls">
+  <div class="input" :class="containerCls">
+    <div v-if="slots.left" class="left-group">
+      <slot name="left" />
+    </div>
+    <div class="input-wrapper">
       <input
         ref="input"
         v-bind="inputAttrs"
@@ -54,7 +66,9 @@ function onInput(event: Event) {
         @input="onInput"
       />
     </div>
-    <slot name="right" />
+    <div v-if="slots.right" class="right-group">
+      <slot name="right" />
+    </div>
   </div>
 </template>
 
@@ -66,31 +80,50 @@ function onInput(event: Event) {
   display: inline-flex;
   width: 100%;
   vertical-align: middle;
+  background: rgba(245, 246, 246, 1);
+  transition: all 0.2s;
+
+  border-radius: 8px;
+
+  &.grouped {
+    &.grouped-left .input-wrapper {
+      padding-left: 4px;
+    }
+
+    &.grouped-right .input-wrapper {
+      padding-right: 4px;
+    }
+  }
+
+  &.focused {
+    box-shadow: 0 0 0 2px rgb(var(--primary-color-token)) inset;
+  }
+
+  &.error {
+    box-shadow: 0 0 0 2px rgb(var(--error-color-token)) inset;
+  }
+
+  .left-group,
+  .right-group {
+    padding-left: 12px;
+    display: inline-flex;
+    align-items: center;
+  }
 
   .input-wrapper {
-    padding: 10px 12px;
-    border-radius: 8px;
     display: inline-flex;
-    flex: 1;
+    flex-grow: 1;
     align-items: center;
     justify-content: center;
+    padding: 0 12px;
     width: 100%;
-    transition: all 0.2s;
-    background: rgba(245, 246, 246, 1);
-
-    &.focused {
-      background: rgba(var(--primary-color-token), 0.05);
-      box-shadow: 0 0 0 2px rgb(var(--primary-color-token)) inset;
-    }
-
-    &.error {
-      background: rgba(var(--error-color-token), 0.05);
-      box-shadow: 0 0 0 2px rgb(var(--error-color-token)) inset;
-    }
+    box-sizing: border-box;
+    outline: 0 none;
 
     .input-field {
       box-sizing: border-box;
       width: 100%;
+      height: 40px;
       flex-grow: 1;
       padding: 0;
       border: none;

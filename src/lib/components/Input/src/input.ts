@@ -2,7 +2,7 @@ import type { ExtractPropTypes } from 'vue'
 
 export const inputProps = {
   modelValue: {
-    type: String,
+    type: [String, null],
     default: '',
   },
   placeholder: {
